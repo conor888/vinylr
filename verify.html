@@ -25,7 +25,7 @@
             data: {strong: true, "code": getCookie("access_code"), "X-Plex-Client-Identifier": getCookie("client_id")},
         }).done(function(data){
             setCookie("auth_key", data.authToken, 3650);
-            window.location.href = "/vinyl";
+            window.location.href = "/vinylr";
         }).fail(function(data){
             $("#login-loading").text("Error logging you in.");
             $("#login-loading-svg").addClass("error");

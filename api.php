@@ -28,7 +28,7 @@ function get_server_url($token): string {
         if ($device['product'] == "Plex Media Server") {
             foreach ($device->children() as $connection) {
                 if ($connection["local"] == "0") {
-                    setcookie("server_url", $connection["uri"], time() + (86400 * 3650), "/vinyl");
+                    setcookie("server_url", $connection["uri"], time() + (86400 * 3650), "/vinylr");
                     return $connection["uri"];
                 }
             }

@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($_COOKIE["client_id"])) {
-    setcookie("client_id", uniqid(), time() + (86400 * 3650), "/vinyl");
+    setcookie("client_id", uniqid(), time() + (86400 * 3650), "/vinylr");
 }
 
 ?>
@@ -41,7 +41,7 @@ if (!isset($_COOKIE["client_id"])) {
                 setCookie("access_code", data.code, 0.1);
 
                 window.location.href = "https://app.plex.tv/auth#?clientID=" + getCookie("client_id") + "&code=" + data.code +
-                                        "&forwardUrl=" + encodeURIComponent("https://conorahern.me/vinyl/verify.html") +
+                                        "&forwardUrl=" + encodeURIComponent("https://conorahern.me/vinylr/verify.html") +
                                         "&context%5Bdevice%5D%5Bproduct%5D=" + encodeURIComponent("Vinylr for Plex");
             });
         });
