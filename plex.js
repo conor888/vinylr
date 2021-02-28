@@ -70,8 +70,7 @@ function parseResult(album, tracks) {
     } else {
         html += parseTrack(tracks["@attributes"]);
     }
-    html += '<span class="button-float">';
-    // html += '<span class="button-float"><input type="button" value="Save" class="save" id="save-'+album["ratingKey"]+'" />';
+    html += '<span class="button-float"><input type="button" value="Save" class="save" id="save-'+album["ratingKey"]+'" />';
     html += '<input type="submit" value="Scrobble" class="scrobble" id="scrobble-submit-'+album["ratingKey"]+'" /></span></form>';
 
     html += '</div></div>';
@@ -83,9 +82,9 @@ function parseResult(album, tracks) {
         return false;
     });
 
-    // $('#save-'+album["ratingKey"]).click(function(){
-    //     saveAlbum(album["ratingKey"]);
-    // });
+    $('#save-'+album["ratingKey"]).click(function(){
+        saveAlbum(album["ratingKey"]);
+    });
 }
 
 function parseTrack(track) {
