@@ -134,7 +134,7 @@ function saveAlbum(albumKey) {
     let tracks = [];
     $('#scrobble-'+albumKey).children('input[type=checkbox]').each(function() {
         if(!this.checked) {
-            tracks.push(this.id.substring(6));
+            tracks.push(this.id.substring(6).split('-')[0]);
         }
     })
 

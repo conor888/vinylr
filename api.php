@@ -2,13 +2,12 @@
 header("Access-Control-Allow-Origin: *");
 
 $token = $_COOKIE["auth_key"];
-if (isset($_COOKIE["server_url"])) {
-    $serverURL = $_COOKIE["server_url"];
-} else {
-    $serverURL = get_server_url($token);
-}
 
 function get_server_url($token): string {
+    if (isset($_COOKIE["server_url"])) {
+        return $_COOKIE["server_url"];
+    }
+
     $response = file_get_contents("https://plex.tv/api/resources?includeHttps=1&X-Plex-Token=".$token);
 
     if ($response === false) {
@@ -38,7 +37,38 @@ function get_server_url($token): string {
     return "";
 }
 
+function get_user_id($token): string {
+    if (isset($_COOKIE["user_id"])) {
+        return $_COOKIE["user_id"];
+    }
+
+    $response = file_get_contents("https://plex.tv/api/home/users?X-Plex-Token=".$token);
+
+    if ($response === false) {
+        echo "Error fetching user listing.";
+        exit;
+    }
+
+    libxml_use_internal_errors(true);
+    $data = simplexml_load_string($response);
+
+    if (!$data) {
+        echo "Error parsing user listing XML.";
+        exit;
+    }
+
+    foreach ($data->children() as $user) {
+        if ($user['admin'] == "1") {
+            setcookie("user_id", $user["uuid"], time() + (86400 * 3650), "/vinyl");
+            return $user["uuid"];
+        }
+    }
+
+    return "";
+}
+
 if (isset($_GET['type']) && $_GET['type'] == 'request') {
+    $serverURL = get_server_url($token);
     $search = $_GET['query'];
     if ($search) {
         $url = $serverURL.'/hubs/search?query=';
@@ -104,7 +134,7 @@ if (isset($_GET['type']) && $_GET['type'] == 'request') {
 }
 
 if (isset($_POST['type']) && $_POST['type'] == 'scrobble') {
-
+    $serverURL = get_server_url($token);
     $output = array();
     $tracks = $_POST['tracks'];
 
@@ -136,4 +166,28 @@ if (isset($_POST['type']) && $_POST['type'] == 'scrobble') {
 
     echo json_encode($output);
     exit;
+}
+
+if (isset($_POST['type']) && $_POST['type'] == 'save') {
+    $user_id = get_user_id($token);
+    try {
+        $pdo = new PDO("sqlite:save.db");
+        // set the PDO error mode to exception
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "CREATE TABLE IF NOT EXISTS u_".$user_id." (
+                    album_key INTEGER PRIMARY KEY UNIQUE NOT NULL, 
+                    tracks LINESTRING NOT NULL);";
+
+        $sql .= "REPLACE INTO u_".$user_id." (album_key, tracks)".
+            "VALUES (".$_POST['album'].", '".implode(",", $_POST['tracks'])."');";
+        // use exec() because no results are returned
+        $pdo->exec($sql);
+
+        echo json_encode("success");
+        exit;
+    } catch(PDOException $e) {
+        echo json_encode("error");
+        exit;
+    }
 }
