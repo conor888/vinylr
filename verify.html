@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vinylr - scrobbler for plex</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="welcome-wrapper">
+    <p id="login-loading">Logging you in...</p>
+    <div id="login-loading-svg"></div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="cookie.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $.ajax({
+            type: "GET",
+            crossDomain: true,
+            url: "https://plex.tv/api/v2/pins/" + getCookie("access_id"),
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Accept", "application/json");
+            },
+            data: {strong: true, "code": getCookie("access_code"), "X-Plex-Client-Identifier": getCookie("client_id")},
+        }).done(function(data){
+            setCookie("auth_key", data.authToken, 3650);
+            window.location.href = "/vinyl";
+        }).fail(function(data){
+            $("#login-loading").text("Error logging you in.");
+            $("#login-loading-svg").addClass("error");
+        });
+    });
+</script>
+
+</body>
+</html>

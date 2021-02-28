@@ -1,0 +1,245 @@
+body {
+    font-family: 'Helvetica LT Std', sans-serif;
+    background: #222222;
+    color: #ffffff;
+}
+
+a {
+    color: aqua;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+h4 {
+    font-weight: 300;
+    margin-top: 0;
+}
+
+select {
+    font-family: 'Helvetica LT Std', sans-serif;
+    background: #3a3a3a;
+    color: #ffffff;
+    border: 0;
+    outline: 0;
+    padding: 5px;
+}
+
+input {
+    font-family: 'Helvetica LT Std', sans-serif;
+    background: #3a3a3a;
+    color: #ffffff;
+    border: 0;
+    outline: 0;
+    padding: 6px;
+}
+
+br {
+    font-size: 0;
+}
+
+#results {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+#results h3 {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 22px;
+}
+
+#plexSearch {
+    text-align: center;
+    padding-top: 5px;
+    margin-top:15px;
+}
+
+#plexSearch #query {
+    font-size: 24px;
+    font-weight: 300;
+    border-radius: 40px;
+    padding: 16px 28px;
+    width: 460px;
+}
+
+#plexSearch .submit {
+    display: none;
+}
+
+.result-img {
+    width: 300px;
+    border-radius: 14px;
+}
+
+.result {
+    background: #131313;
+    padding: 30px;
+    margin: 20px;
+    border-radius: 18px;
+}
+
+.result-left, .result-right {
+    display: inline-block;
+}
+
+.result-right {
+    vertical-align: top;
+    margin-left: 30px;
+    width: calc(100% - 330px);
+}
+
+.artist {
+    margin-bottom: 5px;
+}
+
+.tracks {
+    margin-top: 5px;
+    font-size: 13px;
+}
+
+.track-list {
+    margin: 14px 0;
+    width: 100%;
+}
+
+.track-list label {
+    margin-left: 6px;
+    margin-bottom: 4px;
+    display: inline-block;
+    font-size: 15px;
+}
+
+.track-list .button-float {
+    float: right;
+    margin-top: 10px;
+}
+
+.track-list .scrobble,
+.track-list .save {
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: #3a3a3a;
+    color: #ffffff;
+    transition: 0.25s all;
+}
+
+.track-list .scrobble {
+    width: 84px;
+}
+
+.track-list .save {
+    width: 62px;
+    margin-right: 10px;
+}
+
+.track-list .scrobble.loading,
+.track-list .save.loading {
+    background-image: url("img/loading.svg") !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 32px;
+}
+
+@media (hover: hover) {
+    .track-list .scrobble:hover,
+    .track-list .save:hover {
+        background: #ffffff;
+        color: #131313;
+    }
+}
+
+.track-list .scrobble.success,
+.track-list .save.success {
+    background: #00c853;
+    color: #000000;
+}
+
+@media (hover: hover) {
+    .track-list .scrobble.success:hover,
+    .track-list .save.sucess:hover {
+        background: #5efc82;
+    }
+}
+
+.track-list .scrobble.failure,
+.track-list .save.failure {
+    background: #e53935;
+    color: #000000;
+}
+
+@media (hover: hover) {
+    .track-list .scrobble.failure:hover,
+    .track-list .save.failure:hover {
+        background: #ff6f60;
+    }
+}
+
+/* ----------- Welcome page ----------- */
+#welcome-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+}
+
+.logo-large {
+    background-image: url("img/album.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 120px;
+    display: inline-block;
+}
+
+.logo-title {
+    vertical-align: top;
+    display: inline-block;
+}
+
+.logo-title h1 {
+    margin-top: 17px;
+}
+
+#login-button {
+    display: block;
+    margin: 20px auto 10px;
+    background: #e5a00d;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 18px;
+    color: #ffffff;
+    outline: none;
+    border: none;
+    transition: 0.25s all;
+    cursor: pointer;
+}
+
+@media (hover: hover) {
+    #login-button:hover {
+        color: #000000;
+        background: #ffffff;
+    }
+}
+
+#login-loading {
+    margin-top: 0px;
+    text-align: center;
+    font-size: 28px;
+}
+
+#login-loading-svg {
+    background-image: url("img/loading.svg");
+    height: 40px;
+    width: 40px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 0 auto;
+}
+
+#login-loading-svg.error {
+    background-image: url("img/x.svg") !important;
+}
