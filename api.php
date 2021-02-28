@@ -59,7 +59,7 @@ function get_user_id($token): string {
 
     foreach ($data->children() as $user) {
         if ($user['admin'] == "1") {
-            setcookie("user_id", $user["uuid"], time() + (86400 * 3650), "/vinyl");
+            setcookie("user_id", $user["uuid"], time() + (86400 * 3650), "/vinylr");
             return $user["uuid"];
         }
     }
