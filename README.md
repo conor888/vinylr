@@ -10,4 +10,4 @@ Vinylr is a way to keep track of your plays from vinyl albums, or any other offl
 ![Image of Vinylr](https://conorahern.me/projects/plex-vinyl-scrobbler.jpg)
 
 ## Running Vinylr on your own server
-I currently have an instance of Vinylr already running at the link above, but if you'd prefer to run things yourself, Vinylr can run on any basic LAMP webserver setup. Simply clone this repository into a directory named "vinylr" at the root of your webserver, and change the callback URL to your own domain in welcome.php (replacing the conorahern.me domain with your own).
+I currently have an instance of Vinylr already running at the link above, but if you'd prefer to run things yourself, Vinylr can run on any basic webserver with PHP. Simply clone this repository into a directory named "vinylr" at the root of your webserver, and change the callback URL to your own domain in welcome.php (replacing the conorahern.me domain with your own).
